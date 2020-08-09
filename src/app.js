@@ -3,6 +3,15 @@ const path = require("path");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const app = express();
+const multer = require("multer");
+const formidableMiddleware = require("express-formidable");
+
+const storage = multer.diskStorage({
+  destination: path.join(__dirname, "../public/Imagenes/Pasteles"),
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
 
 //connecting to db
 mongoose
@@ -18,9 +27,16 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 //middlewares
+app.use(
+  multer({
+    storage,
+    dest: path.join(__dirname, "../public/Imagenes/Pasteles"),
+  }).single("imagen")
+);
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
+//app.use(formidableMiddleware());
 
 //routes
 app.use("/", indexRoutes);

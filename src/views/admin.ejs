@@ -1,0 +1,109 @@
+<%-include("partials/_header")%>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <form action="/add" method="POST"> 
+            
+            <div class="form-group">
+
+              <label for="cars" >Categoría:</label>
+
+                <select id="cars" name="categoria">
+                  <option value="Pasteles">Pastel</option>
+                  <option value="Cupcakes">Cupcake</option>>
+                </select>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="text"
+                name="nombre"
+                placeholder="Nombre"
+                class="form-control"
+              />
+            </div>
+
+            <div class="form-group">
+              <textarea
+                name="descripcion"
+                placeholder="Descripcion"
+                class="form-control"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <textarea
+                name="precio"
+                placeholder="Precio"
+                class="form-control"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <textarea
+                name="tiempo"
+                placeholder="Tiempo"
+                class="form-control"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <input type="file" id="myfile" name="imagen">Selecciona Imagen</input>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Add
+            </button>     
+          </form>
+
+          <form action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+              <input type="file" id="myfile" name="imagen">Selecciona Imagen</input>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Add image
+            </button> 
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Categoria</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Tiempo</th>
+            <th>Imagenes</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% for(var i =0; i<prod.length;i++) { %>
+                <tr>
+                    <td><%= i+1 %></td>
+                    <td><%= prod[i].categoria %></td>
+                    <td><%= prod[i].nombre %></td>
+                    <td><%= prod[i].descripcion %></td>
+                    <td><%= prod[i].precio %></td>
+                    <td><%= prod[i].tiempo %></td>
+                    <td><%= prod[i].imagen %></td>
+                    <td>
+                        <!--a href="/done/<%=prod[i]._id%>" class="btn <%= prod[i].status ? "btn-success" : "btn-dark" %>">Done</a>
+                        <a href="/edit/<%=prod[i]._id%>" class="btn btn-info">Edit</a-->
+                        <a href="/delete/<%=prod[i]._id%>" class="btn btn-danger">Delete</a>
+                        
+                    </td>
+                </tr>                
+            <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div-->
+
+<%-include("partials/_footer")%>
